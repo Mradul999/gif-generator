@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { RandomGIF } from "./Components/RandomGIF";
-import {Tag} from "./Components/Tag.js"
+import { Tag } from "./Components/Tag";
 import "./App.css";
 import axios from "axios";
 
 function App() {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [outputGif, setOutputGif] = useState("");
+
 
   async function getRandomGIF() {
     try {
-      const response = await axios.get('https://api.giphy.com/v1/gifs/random', {
+      setLoading(true);
+      const response = await axios.get("https://api.giphy.com/v1/gifs/random", {
         params: {
-          api_key: 'ehsrInxNgBILRfo2zeTmzMPczU5S3V2a' 
-        }
+          api_key: "ehsrInxNgBILRfo2zeTmzMPczU5S3V2a",
+        },
       });
       const gifPath = response.data.data.images.original.url;
-      console.log(gifPath); 
       setImage(gifPath);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching data: ', error);
+      console.error("Error fetching data: ", error);
+     
     }
   }
 
@@ -26,29 +31,26 @@ function App() {
     getRandomGIF();
   }, []);
 
-  // const[searchedGIF ,setSearchedGIF]=useState('');
-  const[outputgif,setoutputgif]=useState('');
-
-
-
-  async function getSearchedGIF(searchedGIF){
+  async function getSearchedGIF(searchedGIF) {
     try {
-      const response = await axios.get('https://api.giphy.com/v1/gifs/random', {
+      setLoading(true);
+      const response = await axios.get("https://api.giphy.com/v1/gifs/random", {
         params: {
-          api_key: 'ehsrInxNgBILRfo2zeTmzMPczU5S3V2a' ,
-          tag:searchedGIF
-        }
+          api_key: "ehsrInxNgBILRfo2zeTmzMPczU5S3V2a",
+          tag: searchedGIF,
+        },
       });
       const gifPath = response.data.data.images.original.url;
-      // console.log(gifPath); 
-      setoutputgif(gifPath);
-      
+      setOutputGif(gifPath);
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching data: ', error);
+      console.error("Error fetching data: ", error);
       
     }
-
   }
+  useEffect(() => {
+    getSearchedGIF();
+  }, []);
 
   return (
     <div className="bg-slate-500 w-full h-full flex flex-col space-y-16 py-2 pb-[20px]">
@@ -56,8 +58,16 @@ function App() {
         RANDOM GIFS
       </h1>
       <div className="flex flex-col gap-3">
-        <RandomGIF image={image} getRandomGIF={getRandomGIF}/>
-        <Tag getSearchedGIF={getSearchedGIF} outputgif={outputgif}></Tag>
+        <RandomGIF
+          image={image}
+          getRandomGIF={getRandomGIF}
+          loading={loading}
+        />
+        <Tag
+          getSearchedGIF={getSearchedGIF}
+          outputGif={outputGif}
+          loading={loading}
+        />
       </div>
     </div>
   );
