@@ -49,11 +49,11 @@ function App() {
     }
   }
   useEffect(() => {
-    getSearchedGIF();
+    getSearchedGIF("Cute Cat");
   }, []);
 
   return (
-    <div className="bg-slate-500 w-full h-full flex flex-col space-y-16 py-2 pb-[20px]">
+    <div className="bg-slate-500 w-full h-[100%] flex flex-col space-y-16 py-2 pb-[20px]">
       <h1 className="mt-[40px] text-center font-bold text-[27px] bg-white mx-14 rounded-lg py-1">
         RANDOM GIFS
       </h1>
