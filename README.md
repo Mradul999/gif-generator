@@ -10,6 +10,6 @@ This React application allows users to generate random GIFs using the Giphy API.
 
 ## Demo
 
-A live demo of the project can be found    https://gif-generator2.netlify.app/
+A live demo of the project can be found    
 
 
