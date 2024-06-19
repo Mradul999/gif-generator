@@ -2,13 +2,13 @@ import { useState } from "react";
 
 export function Tag({getSearchedGIF,outputgif,loading}) {
 
-    const[searchedGIF,setSearchedGIF]=useState('');
+    const[searchedGIF,setSearchedGIF]=useState("");
 
     function changeHandler(event){
         setSearchedGIF(event.target.value)
     }
   return (
-    <div className="flex flex-col justify-between items-center space-y-6   w-[600px] mx-auto py-4 px-14 bg-green-400 rounded-xl border-[1px] border-black">
+    <div className="flex flex-col justify-between items-center space-y-6 lg:w-[600px] md:w-[500px]  sm:w-[400px] w-[350px]   mx-auto py-4 px-14 bg-green-400 rounded-xl border-[1px] border-black">
             <h1 className="text-[20px] text-center font-semibold underline ">Random {searchedGIF} GIF</h1>
             {loading===true?(<p className="text-[20px] font-semibold ">Loading...</p>):(<img src={outputgif} className=" h-350px w-550px" ></img>)}
             

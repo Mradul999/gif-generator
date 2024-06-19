@@ -57,7 +57,7 @@ function App() {
       <h1 className="mt-[40px] text-center font-bold text-[27px] bg-white mx-14 rounded-lg py-1">
         RANDOM GIFS
       </h1>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 ">
         <RandomGIF
           image={image}
           getRandomGIF={getRandomGIF}
